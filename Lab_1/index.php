@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP</title>
+    <title>PHP lab_1</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="wrapper">
         <header>
-            <img src="img/logo.svg" alt="logo">
+            <img src="img/logo.svg" alt="logo" width="200px" height="100px">
             <h2 class="header__title">Лабораторная работа №1</h2>
         </header>
         <main>
@@ -22,7 +22,7 @@
             ?>
         </main>
         <footer>
-            <h2>Старцев Виталий Витальевич 221-322</h2>
+            <h2 class="footer__title">Старцев Виталий Витальевич 221-322</h2>
         </footer>
     </div>
 </body>

@@ -6,25 +6,25 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     background-color: #606060;
     color: white;
     font-family: 'Roboto', sans-serif;
+    height: 100%;
 }
 
 .wrapper {
     width: 1240px;
     margin: 0 auto;
+    position: relative;
+    top: 0;
+    height: 100%;
+    flex-direction: column;
 }
 
 .wrapper, header, main {
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.wrapper {
-    flex-direction: column;
 }
 
 header {
@@ -49,9 +49,16 @@ main > img:last-child {
 }
 
 footer {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     margin-top: 25px;
 }
 
-footer > h2 {
+.footer__title {
+    margin-bottom: 20px;
     font-weight: 400;
 }
