@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: #606060;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+}
+
+.wrapper, header, main {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper {
+    width: 1240px;
+    margin: 0 auto;
+    min-height: 100%;
+    flex-direction: column;
+}
+
+main {
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+header {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    margin: 25px 0 25px 0;
+}
+
+header > .header__title {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+fieldset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 350px;
+    height: 480px;
+}
+
+legend {
+    padding: 5px 10px 5px 10px;
+    margin-left: 15px;
+    background-color: #606060;
+    border-width: 2px;
+    border-style: groove;
+    border-color: rgb(192, 192, 192);
+    transition: all .6s ease-in-out;
+    cursor: default;
+}
+
+label, .form__checkbox {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+label:first-child {
+    margin-top: 0px;
+}
+label:last-child {
+    margin-bottom: 0px;
+}
+
+input, select {
+    border-color: #ffffff00;
+    border-radius: 10px;
+}
+
+input {
+    padding: 15px 25px;
+}
+
+select {
+    padding: 15px 50px;
+}
+
+option {
+    margin: 10px 0px;
+}
+
+.form__checkbox {
+    margin-bottom: 30px;
+}
+.form__checkbox > input {
+    margin-right: 5px;
+}
+.form__checkbox > span {
+    margin-right: 30px;
+}
+.form__checkbox > span:last-child {
+    margin-right: 0px;
+}
+
+.btn {
+    border-radius: 10px;
+    padding: 15px 40px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.btn:hover {
+    transition: all .3s ease-in-out;
+    color: white;
+    background-color: #3d3d3d;
+}
+.next__btn, .prev__btn {
+    color: white;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    border-width: 2px;
+    border-style: groove;
+    border-color: rgb(192, 192, 192);
+    transition: all .6s ease-in-out;
+    text-decoration: none;
+}
+
+#output {
+    outline: none;
+	-moz-appearance: none;
+	border: 2px solid #999;
+    border-radius: 1.2rem;
+    resize: none;
+    background: transparent;
+    font-size: 20px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 0 10px 0;
+}
+.footer__title {
+    font-weight: 400;
+}
