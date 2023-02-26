@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: #606060;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+}
+
+.wrapper, header, .main {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper {
+    width: 1240px;
+    margin: 0 auto;
+    min-height: 100%;
+    flex-direction: column;
+}
+
+.main {
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+header {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    margin: 25px 0 25px 0;
+}
+header > .header__title {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.btn {
+    border-radius: 10px;
+    padding: 15px 40px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.btn:hover {
+    transition: all .3s ease-in-out;
+    color: white;
+    background-color: #3d3d3d;
+}
+
+.main__heading, .main__subtitle  {
+    letter-spacing: .2rem;
+    margin-bottom: 15px;
+}
+.main__heading > span, .main__subtitle > span {
+    color: black;
+    font-weight: bold;
+}
+.main__input {
+    font-size: 20px;
+    padding: 15px 25px;
+    border-color: #ffffff00;
+    border-radius: 10px;
+}
+.main__input::placeholder {
+    font-size: 20px;
+}
+.main__answer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.main__output {
+    text-align: center;
+    padding: 20px;
+    background: transparent;
+	border: 2px solid #999;
+    border-radius: 1.2rem;
+    font-size: 20px;
+    resize: none;
+    outline: none;
+	-moz-appearance: none;
+    pointer-events: none;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 0 10px 0;
+}
+.footer__title {
+    font-weight: 400;
+}
