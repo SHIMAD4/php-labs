@@ -27,33 +27,55 @@
                     if(isset($_POST)){
                         $equation = $_POST["equation"];
                         $equation = str_replace(' ', '', $equation);
-                        if(strpbrk($equation, '+') == TRUE) {
-                            $operand1 = strstr($equation, '+', true);
-                            $operand2 = strstr($equation, '=');
-                            if(strpbrk($operand2, '=') == TRUE) {$operand2 = str_replace('=', '', $operand2); $operand2 = (int)$operand2;}
-                            $res = $operand2 - $operand1;
-                            echo $res;
+                        function getOperand($arg1) {
+                            if(strpbrk($arg1, '=') == TRUE) {
+                                $arg1 = str_replace('=', '', $arg1);
+                                return (int)$arg1;
+                            }
                         }
-                        if(strpbrk($equation, '-') == TRUE) {
-                            $operand1 = strstr($equation, '-', true);
-                            $operand2 = strstr($equation, '=');
-                            if(strpbrk($operand2, '=') == TRUE) {$operand2 = str_replace('=', '', $operand2); $operand2 = (int)$operand2;}
-                            $res = $operand2 - $operand1;
-                            echo -$res;
+                        function getOperator($arg1) {
+                            if(strpbrk($arg1, '+') == TRUE) {
+                                return 0;
+                            }
+                            if(strpbrk($arg1, '-') == TRUE) {
+                                return 1;
+                            }
+                            if(strpbrk($arg1, '*') == TRUE) {
+                                return 2;
+                            }
+                            if(strpbrk($arg1, '/') == TRUE) {
+                                return 3;
+                            }
                         }
-                        if(strpbrk($equation, '*') == TRUE) {
-                            $operand1 = strstr($equation, '*', true);
-                            $operand2 = strstr($equation, '=');
-                            if(strpbrk($operand2, '=') == TRUE) {$operand2 = str_replace('=', '', $operand2); $operand2 = (int)$operand2;}
-                            $res = $operand2 / $operand1;
-                            echo $res;
-                        }
-                        if(strpbrk($equation, '/') == TRUE) {
-                            $operand1 = strstr($equation, '/', true);
-                            $operand2 = strstr($equation, '=');
-                            if(strpbrk($operand2, '=') == TRUE) {$operand2 = str_replace('=', '', $operand2); $operand2 = (int)$operand2;}
-                            $res = $operand2 * $operand1;
-                            echo $res;
+                        switch (getOperator($equation)) {
+                            case 0:
+                                $operand1 = strstr($equation, '+', true);
+                                $operand2 = getOperand(strstr($equation, '='));
+                                echo $res = $operand2 - $operand1;
+                                break;
+                            case 1:
+                                $operand1 = strstr($equation, '-', true);
+                                $operand2 = getOperand(strstr($equation, '='));
+                                echo $res = -($operand2 - $operand1);
+                                break;
+                            case 2:
+                                $operand1 = strstr($equation, '*', true);
+                                $operand2 = getOperand(strstr($equation, '='));
+                                if($operand1 != 0) {
+                                    echo $res = $operand2 / $operand1;
+                                }else {
+                                    echo '∅';
+                                }
+                                break;
+                            case 3:
+                                $operand1 = strstr($equation, '/', true);
+                                $operand2 = getOperand(strstr($equation, '='));
+                                if($operand1 != 0 and $operand2 != 0) {
+                                    echo $res = $operand1 / $operand2;
+                                }else {
+                                    echo '∅';
+                                }
+                                break;
                         }
                     };
                 ?>
