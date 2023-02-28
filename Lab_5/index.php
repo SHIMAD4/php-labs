@@ -15,38 +15,45 @@
             <h2 class="header__title">Лабораторная работа №5</h2>
         </header>
         <main class="main">
-            <form action="" class="form">
+            <form action="" class="form" method="POST">
                 <div class="screens">
-                    <input type="text" id="input" placeholder="Ваш пример">
-                    <textarea name="output" id="output" cols="46" rows="2" placeholder="Ответ"></textarea>
+                    <input type="text" id="input" name="equation" placeholder="Ваш пример">
+                    <textarea name="output" id="output" cols="46" rows="2" placeholder="Ответ">
+                    <?php
+                        if(isset($_POST["equation"])){
+                            $equation = $_POST["equation"];
+                            echo $equation;
+                        }
+                    ?>
+                    </textarea>
                 </div>
                 <div class="keyboard">
                     <div class="operands">
-                        <button class="btn" data-value="0">0</button>
-                        <button class="btn" data-value="1">1</button>
-                        <button class="btn" data-value="2">2</button>
-                        <button class="btn" data-value="3">3</button>
-                        <button class="btn" data-value="4">4</button>
-                        <button class="btn" data-value="5">5</button>
-                        <button class="btn" data-value="6">6</button>
-                        <button class="btn" data-value="7">7</button>
-                        <button class="btn" data-value="8">8</button>
-                        <button class="btn" data-value="9">9</button>
-                        <button class="btn" data-value="AC">AC</button>
-                        <button class="btn" data-value="=">=</button>
+                        <button class="btn" type="button" data-value="0">0</button>
+                        <button class="btn" type="button" data-value="1">1</button>
+                        <button class="btn" type="button" data-value="2">2</button>
+                        <button class="btn" type="button" data-value="3">3</button>
+                        <button class="btn" type="button" data-value="4">4</button>
+                        <button class="btn" type="button" data-value="5">5</button>
+                        <button class="btn" type="button" data-value="6">6</button>
+                        <button class="btn" type="button" data-value="7">7</button>
+                        <button class="btn" type="button" data-value="8">8</button>
+                        <button class="btn" type="button" data-value="9">9</button>
+                        <button class="btn" type="button" data-value="AC">AC</button>
+                        <input class="btn" data-value="=" type="submit" value="=" name="send">
                     </div>
                     <div class="operators">
                         <div>
-                            <button class="btn" data-value="(">(</button>
-                            <button class="btn" data-value=")">)</button>
+                            <button class="btn" type="button" data-value="(">(</button>
+                            <button class="btn" type="button" data-value=")">)</button>
                         </div>
                         <div>
-                            <button class="btn" data-value="+">+</button>
-                            <button class="btn" data-value="-">-</button>
+                            <button class="btn" type="button" data-value="+">+</button>
+                            <button class="btn" type="button" data-value="-">-</button>
                         </div>
                         <div>
-                            <button class="btn" data-value="*">*</button>
-                            <button class="btn" data-value="/">/</button>
+                            <button class="btn" type="button" data-value="*">*</button>
+                            <button class="btn" type="button" data-value="/">/</button>
                         </div>
                     </div>
                 </div>
