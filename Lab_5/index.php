@@ -20,9 +20,12 @@
                     <input type="text" id="input" name="equation" placeholder="Ваш пример">
                     <textarea name="output" id="output" cols="46" rows="2" placeholder="Ответ">
                     <?php
-                        if(isset($_POST["equation"])){
-                            $equation = $_POST["equation"];
-                            echo $equation;
+                        if(isset($_POST)) {
+                            require_once __DIR__ . '/Calculate.php';
+                            $calc = new Calculate($_POST["equation"]);
+                            if ($calc->postfixString) {
+                                echo $calc->result;
+                            }
                         }
                     ?>
                     </textarea>
