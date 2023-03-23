@@ -31,6 +31,7 @@
     padding: 15px 0;
 }
 #output {
+    height: 200px;
     padding-top: 25px;
     resize: none;
 }

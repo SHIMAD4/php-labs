@@ -6,7 +6,7 @@ arrOfButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         if(btn.getAttribute('data-value').indexOf('0123456789+-*/AC')) {
             inputScreen.value += btn.innerText
-            if(btn.getAttribute('data-value') == 'AC' && window) {
+            if(btn.getAttribute('data-value') == 'AC') {
                 inputScreen.value  = ''
                 outputScreen.value = ''
             }

@@ -18,14 +18,62 @@
             <form action="" class="form" method="POST">
                 <div class="screens">
                     <input type="text" id="input" name="equation" placeholder="Ваш пример">
-                    <textarea name="output" id="output" cols="46" rows="2" placeholder="Ответ">
-                    <?php
-                        if(isset($_POST)) {
-                            require_once __DIR__ . '/Calculate.php';
-                            $calc = new Calculate($_POST["equation"]);
-                            if ($calc->postfixString) {
-                                echo $calc->result;
-                            }
+                    <textarea name="output" id="output" cols="46" placeholder="Ответ">
+                    <?php 
+                        if ($_POST && $_POST['equation']){
+                            $eq = (string)$_POST['equation'];
+                            function checkOperator($equation) {
+                                if(stristr($equation, '+')) {
+                                    return 0;
+                                }elseif(stristr($equation, '-')) {
+                                    return 1;
+                                }elseif(stristr($equation, '/')) {
+                                    return 2;
+                                }elseif(stristr($equation, '*')) {
+                                    return 3;
+                                };
+                            };
+                            function checkOperand($equation) {
+                                switch (checkOperator($equation)) {
+                                    case 0:
+                                        $equation = explode('+', $equation);
+                                        return $equation;
+                                        // break
+                                    case 1:
+                                        $equation = explode('-', $equation);
+                                        return $equation;
+                                        // break
+                                    case 2:
+                                        $equation = explode('/', $equation);
+                                        return $equation;
+                                        // break
+                                    case 3:
+                                        $equation = explode('*', $equation);
+                                        return $equation;
+                                        // break
+                                }
+                            };
+                            function calc($operands, $operator) {
+                                switch ($operator) {
+                                    case 0:
+                                        $res = $operands[0] + $operands[1];
+                                        echo $res;
+                                        break;
+                                    case 1:
+                                        $res = $operands[0] - $operands[1];
+                                        echo $res;
+                                        break;
+                                    case 2:
+                                        $res = $operands[0] / $operands[1];
+                                        echo $res;
+                                        break;
+                                    case 3:
+                                        $res = $operands[0] * $operands[1];
+                                        echo $res;
+                                        break;
+                                }
+                            };
+                            calc(checkOperand($eq), checkOperator($eq));
                         }
                     ?>
                     </textarea>
