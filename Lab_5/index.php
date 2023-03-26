@@ -20,61 +20,116 @@
                     <input type="text" id="input" name="equation" placeholder="Ваш пример">
                     <textarea name="output" id="output" cols="46" placeholder="Ответ">
                     <?php 
-                        if ($_POST && $_POST['equation']){
-                            $eq = (string)$_POST['equation'];
-                            function checkOperator($equation) {
-                                if(stristr($equation, '+')) {
-                                    return 0;
-                                }elseif(stristr($equation, '-')) {
-                                    return 1;
-                                }elseif(stristr($equation, '/')) {
-                                    return 2;
-                                }elseif(stristr($equation, '*')) {
-                                    return 3;
-                                };
-                            };
-                            function checkOperand($equation) {
-                                switch (checkOperator($equation)) {
-                                    case 0:
-                                        $equation = explode('+', $equation);
-                                        return $equation;
-                                        // break
-                                    case 1:
-                                        $equation = explode('-', $equation);
-                                        return $equation;
-                                        // break
-                                    case 2:
-                                        $equation = explode('/', $equation);
-                                        return $equation;
-                                        // break
-                                    case 3:
-                                        $equation = explode('*', $equation);
-                                        return $equation;
-                                        // break
-                                }
-                            };
-                            function calc($operands, $operator) {
-                                switch ($operator) {
-                                    case 0:
-                                        $res = $operands[0] + $operands[1];
-                                        echo $res;
-                                        break;
-                                    case 1:
-                                        $res = $operands[0] - $operands[1];
-                                        echo $res;
-                                        break;
-                                    case 2:
-                                        $res = $operands[0] / $operands[1];
-                                        echo $res;
-                                        break;
-                                    case 3:
-                                        $res = $operands[0] * $operands[1];
-                                        echo $res;
-                                        break;
-                                }
-                            };
-                            calc(checkOperand($eq), checkOperator($eq));
+                        function isDigit( $a ) {
+                          if( (!$a) or (!is_numeric($a))) return false;
+                          return true;
                         }
+
+                        function calc( $val ) {
+                          if(!$val) return 'Выражение не задано!';
+                          if(isDigit($val)) return $val;
+
+                          $args = explode('+', $val);
+                          if(count($args) > 1) {
+                            $sum = 0;
+                            for($i = 0; $i < count($args); $i++) { 
+                              $arg = $args[$i];
+                              if(!isDigit($arg)) $arg = calc($arg);
+                              $sum += $arg;
+                            }
+                            return $sum;
+                          }
+          
+                          $args = explode("-", $val);
+                          if( count($args) > 1 ) {
+                            if (!is_numeric($args[0])) {
+                                $args[0] = calc($args[0]);
+                            }
+          
+                            $minusRez = $args[0];
+          
+                            for($i = 1; $i < count($args); $i++){
+                              if (!is_numeric($args[$i])) {
+                                  $args[$i] = calc($args[$i]);
+                              }
+                              $minusRez -= $args[$i];
+                            }
+                            return $minusRez;
+                          }
+          
+                          $args = explode('*', $val);
+                          if( count($args) > 1 ) {
+                            $sup = 1;
+          
+                            for($i = 0; $i < count($args); $i++) {
+                              $arg = $args[$i];
+                              if( !isDigit($arg) ) {
+                                $arg = calc($args[$i]);
+                              }
+                              $sup *= $arg; 
+                            }
+                            return $sup;
+                          }
+          
+                          $args = explode("÷", $val); 
+                          if( count($args) > 1 ) {
+                            if (!is_numeric($args[0])) {
+                                $args[0] = calc($args[0]);
+                            }
+                            $del = $args[0];
+                            for($i = 1; $i < count($args); $i++){
+                                if (!is_numeric($args[$i])) {
+                                    $args[$i] = calc($args[$i]);
+                                }
+                                $del /= $args[$i];
+                            }
+                            return $del;
+                          }
+                          return 'Недопустимые символы в выражении';
+                        }
+
+                        function SqValid( $val ) {
+                          $open = 0;
+
+                          for($i = 0; $i < strlen($val); $i++) {
+                            if($val[$i] == '(') $open++;
+                            else {
+                              if($val[$i] == ')'){
+                                $open--;
+                                if($open < 0) return false;
+                              }
+                            }
+                          }
+                          if( $open !== 0 ) return false;
+                          return true;
+                        }
+
+                        function SqCalc($val) {
+                            if (!SqValid($val)) return 'Неправильная расстановка скобок';
+
+                            $start = strpos($val, '(');
+                            if ($start === false) return calc($val);
+                            
+                            $end = $start + 1;
+                            $open = 1;
+
+                            while ($open && $end < strlen($val)) {
+                                if ($val[$end] == '(') $open++;
+                                if ($val[$end] == ')') $open--;
+                                $end++;
+                            }
+
+                            $new_val = substr($val, 0, $start);
+                            $new_val .= SqCalc(substr($val, $start + 1, $end - $start - 2));
+                            $new_val .= substr($val, $end);
+                        
+                            return SqCalc($new_val);
+                        }
+
+                        if (isset($_POST['equation'])) {
+                            $res = SqCalc($_POST['equation']);
+                            echo $res;
+                        };
                     ?>
                     </textarea>
                 </div>
