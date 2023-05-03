@@ -5,44 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Work</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="wrapper">
+<body class="flex justify-center items-center h-screen">
+    <div class="container mx-auto flex flex-col justify-center items-center">
 
         <?php if($_COOKIE['user'] == ''): ?>
 
-        <form class="login-form" action="./auth.php" method="post">
-            <label class="login">
-                <input name="login" id="login" type="text" class="login__input" placeholder="Введите логин">
+        <form class="flex flex-col mx-auto w-fit"
+              action="./auth/auth.php"
+              method="post">
+            <label class="flex flex-col justify-center items-center">
+                <input class="border-2 border-black border-solid text-[16px] px-[40px] py-[20px] mb-[10px]"
+                       type="text"
+                       name="login"
+                       id="login"
+                       placeholder="Введите логин">
             </label>
-            <label class="pass">
-                <input name="pass" id="pass" type="text" class="pass__input" placeholder="Введите пароль">
+            <label class="flex flex-col justify-center items-center">
+                <input class="border-2 border-black border-solid text-[16px] px-[40px] py-[20px] mb-[10px]"
+                       type="text" 
+                       name="pass"
+                       id="pass"
+                       placeholder="Введите пароль">
             </label>
-            <label class="button">
-                <button type="submit">Войти</button>
+            <label class="flex flex-col justify-center items-center mt-[10px]">
+                <button class="border-2 border-[#ccc] border-solid bg-black text-white px-[30px] py-[15px] rounded-[10px] text-[20px] hover:cursor-pointer active:opacity-[.7]" 
+                        type="submit">Войти</button>
             </label>
         </form>
 
         <?php else: ?>
 
-        <div class="account">
-            <form action="./sms.php" method="post" class="sms-form">
-                <h2 class="hello-msg">Привет <?= $_COOKIE['user'] ?>.</br>Чтобы выйти нажмите
-                    <a href="./exit.php" class="exit-btn">здесь.</a>
+        <div class="flex justify-center items-center gap-[50px] mt-50px">
+            <form class="flex justify-center items-center flex-col"
+                  action="./sms/addSMS.php"
+                  method="post">
+                <h2 class="text-[24px] font-bold text-black text-center mb-[30px]">
+                    Привет <?= $_COOKIE['user'] ?>.</br>
+                    Чтобы выйти нажмите
+                    <a class="text-red-600 text-[24px] font-bold text-center" 
+                       href="./auth/exit.php">здесь.</a>
                 </h2>
-                <label class="message">
-                    <textarea name="message" id="message" class="message" cols="40" rows="8"></textarea>
+                <label>
+                    <textarea class="resize-none p-[20px] text-[17px] border-2" name="message" id="message" cols="40" rows="8"></textarea>
                 </label>
-                <label class="save">
-                    <!-- <input type="hidden" name="save-btn" value="0"> -->
-                    <input type="checkbox" class="save-btn" name="save-btn" id="save-btn" value="save"><span>save message</span>
+                <label class="flex justify-center items-center mb-[20px]">
+                    <input class="mr-[10px]"
+                           type="checkbox"
+                           name="save-btn"
+                           id="save-btn"
+                           value="save"><span class="font-bold uppercase text-[17px]">save message</span>
                 </label>
-                <label class="button">
-                    <button type="submit">Отправить</button>
+                <label>
+                    <button type="submit" class=" border-2 border-[#ccc] border-solid bg-black text-white px-[30px] py-[15px] rounded-[10px] text-[20px] hover:cursor-pointer active:opacity-[.7]">Отправить</button>
                 </label>
             </form>
-            <div class="view-sms"> <?php include 'view.php'; ?> </div>
+            <div class="scroll-style flex flex-col items-center h-[530px] overflow-y-scroll pr-[20px]">
+                <?php include './sms/viewSMS.php'; ?>
+            </div>
         </div>
 
         <?php endif; ?>
