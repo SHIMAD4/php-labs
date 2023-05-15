@@ -39,27 +39,23 @@
         <?php else: ?>
 
         <div class="flex justify-center items-center gap-[50px] mt-50px">
-            <form class="flex justify-center items-center flex-col"
-                  action="./sms/addSMS.php"
-                  method="post">
+            <form class="flex justify-center items-center flex-col" action="./sms/addSMS.php" method="post">
                 <h2 class="text-[24px] font-bold text-black text-center mb-[30px]">
                     Привет <?= $_COOKIE['user'] ?>.</br>
                     Чтобы выйти нажмите
-                    <a class="text-red-600 text-[24px] font-bold text-center" 
-                       href="./auth/exit.php">здесь.</a>
+                    <a class="text-red-600 text-[24px] font-bold text-center" href="./auth/exit.php">здесь.</a>
                 </h2>
                 <label>
                     <textarea class="resize-none p-[20px] text-[17px] border-2" name="message" id="message" cols="40" rows="8"></textarea>
                 </label>
                 <label class="flex justify-center items-center mb-[20px]">
-                    <input class="mr-[10px]"
-                           type="checkbox"
-                           name="save-btn"
-                           id="save-btn"
-                           value="save"><span class="font-bold uppercase text-[17px]">save message</span>
+                    <input class="mr-[10px]" type="checkbox" name="save-btn" id="save-btn" value="save">
+                    <span class="font-bold uppercase text-[17px]">save message</span>
                 </label>
                 <label>
-                    <button type="submit" class=" border-2 border-[#ccc] border-solid bg-black text-white px-[30px] py-[15px] rounded-[10px] text-[20px] hover:cursor-pointer active:opacity-[.7]">Отправить</button>
+                    <button class=" border-2 border-[#ccc] border-solid bg-black text-white px-[30px] py-[15px] rounded-[10px] text-[20px] hover:cursor-pointer active:opacity-[.7]" type="submit">
+                        Отправить
+                    </button>
                 </label>
             </form>
             <div class="scroll-style flex flex-col items-center h-[530px] overflow-y-scroll pr-[20px]">
